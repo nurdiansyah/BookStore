@@ -4,8 +4,8 @@ echo 'Building Docker image for your Maven-built Java application'
 set -x
 
 # Ganti "nama-image" dan "tag" sesuai kebutuhan
-docker build -t radar511/devops-integration
-
+# docker build -t radar511/devops-integration
+docker pull radar511/devops-integration
 set +x
 
 echo 'Running Docker container for your Java application'
