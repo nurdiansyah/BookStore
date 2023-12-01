@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage ('Build Maven'){
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/RadBile2022/devops-automation.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/nurdiansyah/BookStore.git']])
                 sh 'mvn clean install'
             }
         }
@@ -20,12 +20,9 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u radar511 -p ${dockerhubpwd}'
-                    
-                    sh 'docker push radar511/devops-integration'
-                }
-                    
+                withCredentials([string(credentialsId: 'nurdiansyah-hub-docker', variable: 'pass')]) {
+                    sh 'docker login -u nurdiansyah -p ${pass}'
+                    sh 'docker push nurdiansyah/book-store'
                 }
             }
         }
